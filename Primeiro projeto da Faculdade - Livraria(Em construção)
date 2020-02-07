@@ -1,0 +1,1259 @@
+#include <iostream>
+#include <fstream>
+#define TAM 1000
+#include <string>
+#include <sstream>
+
+
+using namespace std;
+
+int codigoglobal=0;
+
+
+struct livro{
+
+int codigo;	
+string titulo;
+string autor;
+string tipo;
+string idioma;
+int quantidade;
+float precocompra;	
+float precovenda;	
+};
+
+float validarentrada(){
+//pesquisar o uso de expressões regulares em c++
+string verificarentrada = " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+-*/,;?/°{}[]ºª´`""''!@#$%¨&*()_+=§";
+string opcaoaux;
+bool cond = true;
+float opcao;
+		
+		cin>>opcaoaux;
+		for(int i = 0; i < verificarentrada.size()-1; i++){
+				for(int j=0; j< opcaoaux.size()-1;j++){				
+					if (verificarentrada[j] == opcaoaux[j]){
+						cond=false;	
+						}
+					}
+				}
+				
+		if(cond){
+		
+		stringstream conversor(opcaoaux);
+		conversor>>opcao;
+		return opcao;	
+			
+	
+		}else{
+			
+			return 0;	
+			
+			
+		}		
+	
+}
+
+void cadastraritem(livro item[0]){
+	
+
+bool validador;	
+
+
+for(int cont=0;cont<codigoglobal;cont++){
+
+	if(item[cont].codigo == 0){
+	
+		cout<<"Proximo codigo disponivel: "<<cont+1<<endl;
+		validador=true;
+cout<<"*********************** CADASTRO DE ITEM ***********************\n";
+
+cout<<"INSIRA AS INFORMACOES PARA CADASTRAR O ITEM: "<<cont+1<<"\n\n";		
+
+item[cont].codigo=cont+1;
+cin.ignore();
+do{		
+cout<<"Digite o titulo do livro: ";
+getline(cin,item[cont].titulo);
+}while(item[cont].titulo=="");
+
+do{
+cout<<"Digite o autor do livro: ";
+getline(cin,item[cont].autor);
+}while(item[cont].autor=="");
+
+do{	
+cout<<"Digite o tipo do livro: ";
+getline(cin,item[cont].tipo);	
+}while(item[cont].tipo=="");
+
+do{
+cout<<"Digite o idioma do livro: ";
+getline(cin,item[cont].idioma);
+}while(item[cont].idioma=="");
+
+do{
+	cout<<"Digite a quantidade comprada: ";
+	item[cont].quantidade=validarentrada();	
+	cin.ignore();
+	
+		if(item[cont].quantidade==0){
+			cout<<"Digite uma valor numerico\n";	
+			}
+}while(item[cont].quantidade==0);
+
+do{
+	cout<<"Digite o preco de compra: ";
+	item[cont].precocompra=validarentrada();	
+	cin.ignore();
+		if(item[cont].precocompra==0){
+			cout<<"Digite uma valor numerico\n";	
+			}
+}while(item[cont].precocompra==0);
+
+do{
+	cout<<"Digite o preco de venda: ";
+	item[cont].precovenda=validarentrada();	
+	cin.ignore();
+	if(item[cont].precovenda==0){
+			cout<<"Digite uma valor numerico\n";	
+			}
+}while(item[cont].precovenda==0);
+
+cout<<"\n\nO livro foi cadastrado com sucesso.\nSeu codigo para consulta: "<<cont+1<<"\n\n";
+cout<<"****************************************************************\n\n";
+system("pause");
+system("cls");
+		
+	}
+
+}
+
+if(validador!=true){
+	
+cout<<"*********************** CADASTRO DE ITEM ***********************\n";
+
+cout<<"INSIRA AS INFORMACOES PARA CADASTRAR O ITEM: "<<codigoglobal+1<<"\n\n";
+	
+item[codigoglobal].codigo=codigoglobal+1;	
+cin.ignore();
+do{
+cout<<"Digite o titulo do livro: ";
+getline(cin,item[codigoglobal].titulo);
+}while(item[codigoglobal].titulo=="");
+
+do{
+cout<<"Digite o autor do livro: ";
+getline(cin,item[codigoglobal].autor);
+}while(item[codigoglobal].autor=="");
+
+do{
+cout<<"Digite o tipo do livro: ";
+getline(cin,item[codigoglobal].tipo);	
+}while(item[codigoglobal].tipo=="");
+
+do{
+cout<<"Digite o idioma do livro: ";
+getline(cin,item[codigoglobal].idioma);
+}while(item[codigoglobal].idioma=="");
+
+do{
+	cout<<"Digite a quantidade comprada: ";
+	item[codigoglobal].quantidade=validarentrada();	
+	cin.ignore();
+	
+		if(item[codigoglobal].quantidade==0){
+			cout<<"Digite uma valor numerico\n";	
+			}
+}while(item[codigoglobal].quantidade==0);
+
+do{
+	cout<<"Digite o preco de compra: ";
+	item[codigoglobal].precocompra=validarentrada();	
+	cin.ignore();
+		if(item[codigoglobal].precocompra==0){
+			cout<<"Digite uma valor numerico\n";	
+			}
+}while(item[codigoglobal].precocompra==0);
+
+do{
+	cout<<"Digite o preco de venda: ";
+	item[codigoglobal].precovenda=validarentrada();	
+	cin.ignore();
+	if(item[codigoglobal].precovenda==0){
+			cout<<"Digite uma valor numerico\n";	
+			}
+}while(item[codigoglobal].precovenda==0);
+
+
+cout<<"\n\nO livro foi cadastrado com sucesso.\nSeu codigo para consulta: "<<codigoglobal+1<<"\n\n";
+cout<<"****************************************************************\n\n";
+codigoglobal++; 
+system("pause");
+system("cls");
+}
+
+}
+
+void listaritens(livro item[TAM]){
+
+	if(codigoglobal>0){
+
+cout<<"************************** LISTA DE ITENS CADASTRADOS **************************\n\n";	
+
+for(int cont=0;cont<codigoglobal;cont++){
+
+cout<<"**************************DETALHAMENTO DO ITEM:"<<cont+1<<"********************************\n";
+
+cout<<"Codigo do livro: ";
+cout<<item[cont].codigo<<"\n";
+
+cout<<"Titulo do livro: ";
+cout<<item[cont].titulo<<"\n";
+
+cout<<"Autor do livro: ";
+cout<<item[cont].autor<<"\n";
+
+cout<<"Tipo do livro: ";
+cout<<item[cont].tipo<<"\n";
+
+cout<<"Idioma do livro: ";
+cout<<item[cont].idioma<<"\n";
+
+cout<<"Quantidade disponivel do livro: ";
+cout<<item[cont].quantidade<<"\n";
+
+cout<<"Preco de compra: ";
+cout<<item[cont].precocompra<<"\n";
+
+cout<<"Preco de venda: ";
+cout<<item[cont].precovenda<<"\n";
+
+cout<<"********************************************************************************\n\n";	
+}
+
+cout<<"************************************** FIM *************************************\n\n";
+
+}else{
+cout<<"******************* LISTA DE ITENS CADASTRADOS *******************\n\n\n\n\n\n\n\n\n";
+cout<<"******************** NAO HA ITENS CADASTRADOS ********************\n\n\n\n\n\n\n\n\n";
+cout<<"******************************************************************\n";
+	
+}
+}
+
+void exportarcadastro(livro item[TAM]){
+	
+	ofstream exportarcadastro;
+	
+	exportarcadastro.open ("bibliotecabackup.txt");
+	
+	exportarcadastro<<"";
+	
+	exportarcadastro.close();
+	
+
+	exportarcadastro.open ("bibliotecabackup.txt",std::ios_base::app);
+	
+	for(int cont=0;cont<codigoglobal;cont++){
+		
+	exportarcadastro<<item[cont].codigo<<"\n";
+	exportarcadastro<<item[cont].titulo<<"\n";
+	exportarcadastro<<item[cont].autor<<"\n";
+	exportarcadastro<<item[cont].tipo<<"\n";
+	exportarcadastro<<item[cont].idioma<<"\n";
+	exportarcadastro<<item[cont].quantidade<<"\n";
+	exportarcadastro<<item[cont].precocompra<<"\n";
+	exportarcadastro<<item[cont].precovenda<<"\n";
+	}
+	exportarcadastro.close();		
+	
+}
+
+void importarcadastro(livro item[TAM]){
+	string linha;
+	int contl=0,cont=0,aux;
+	ifstream arquivos ("bibliotecabackup.txt");
+	
+	
+	
+		for(linha; getline(arquivos,linha);){
+		
+			if(contl==0){		
+					stringstream cod(linha);
+					cod>>item[cont].codigo;	
+				}
+					if(contl==1){		
+					item[cont].titulo=linha;
+				}
+				
+				if(contl==2){		
+					item[cont].autor=linha;
+				}
+				
+				if(contl==3){		
+					item[cont].tipo=linha;
+				}
+				
+				if(contl==4){		
+					item[cont].idioma=linha;
+				}
+				
+				if(contl==5){		
+					stringstream qtd(linha);
+					qtd>>item[cont].quantidade;
+				}	
+				
+				if(contl==6){		
+					stringstream prec(linha);
+					prec>>item[cont].precocompra;
+				}
+				
+				if(contl==7){		
+					stringstream prev(linha);
+					prev>>item[cont].precovenda;
+			}						
+								
+				
+			contl++;
+			
+			if(contl==8){
+			contl=0;
+			cont++;
+			codigoglobal=cont;	
+			}	
+			}
+	
+				
+	}
+
+void extrairrelatorio(livro item[TAM]){
+	
+	if(codigoglobal>0){
+	
+	
+	ofstream extrairrelatorioexcel;
+	ofstream extrairrelatoriotxt;
+	
+	extrairrelatorioexcel.open ("Relatorioexcel.txt");
+	extrairrelatoriotxt.open ("Relatorio em txt.txt");	
+	
+	extrairrelatorioexcel<<"";
+	extrairrelatoriotxt<<"";
+	
+	
+	extrairrelatorioexcel.close();
+	extrairrelatoriotxt.close();
+	
+
+	extrairrelatorioexcel.open ("Relatorioexcel.txt",std::ios_base::app);
+	extrairrelatoriotxt.open ("Relatorio em txt.txt",std::ios_base::app);
+	
+	extrairrelatorioexcel<<"CODIGO-TITULO-AUTOR-TIPO-IDIOMA-QUANTIDADE-PRECO DE COMPRA-PRECO DE VENDA\n";
+	
+	for(int cont=0;cont<codigoglobal;cont++){
+		
+	extrairrelatorioexcel<<item[cont].codigo<<"-";
+	extrairrelatorioexcel<<item[cont].titulo<<"-";
+	extrairrelatorioexcel<<item[cont].autor<<"-";
+	extrairrelatorioexcel<<item[cont].tipo<<"-";
+	extrairrelatorioexcel<<item[cont].idioma<<"-";
+	extrairrelatorioexcel<<item[cont].quantidade<<"-";
+	extrairrelatorioexcel<<item[cont].precocompra<<"-";
+	extrairrelatorioexcel<<item[cont].precovenda<<"-";
+	extrairrelatorioexcel<<endl;
+	}
+	
+	extrairrelatoriotxt<<"************************** LISTA DE ITENS CADASTRADOS **************************\n\n";
+		
+	for(int cont=0;cont<codigoglobal;cont++){
+	extrairrelatoriotxt<<"**************************DETALHAMENTO DO ITEM:"<<cont+1<<"********************************\n";	
+	extrairrelatoriotxt<<"CODIGO: "<<item[cont].codigo<<"\n";
+	extrairrelatoriotxt<<"TITULO: "<<item[cont].titulo<<"\n";
+	extrairrelatoriotxt<<"AUTOR: "<<item[cont].autor<<"\n";
+	extrairrelatoriotxt<<"TIPO: "<<item[cont].tipo<<"\n";
+	extrairrelatoriotxt<<"IDIOMA: "<<item[cont].idioma<<"\n";
+	extrairrelatoriotxt<<"QUANTIDADE: "<<item[cont].quantidade<<"\n";
+	extrairrelatoriotxt<<"PRECO DE COMPRA: "<<item[cont].precocompra<<"\n";
+	extrairrelatoriotxt<<"PRECO DE VENDA: "<<item[cont].precovenda<<"\n";
+	extrairrelatoriotxt<<"********************************************************************************\n\n";
+	}
+	
+	extrairrelatoriotxt<<"************************************** FIM *************************************\n\n";
+	
+	extrairrelatoriotxt.close();
+	system("cls");
+	cout<<"******************************************************************\n\n\n\n\n\n\n\n\n";
+	cout<<"**************** RELATORIOS EXTRAIDOS COM SUCESSO ****************\n\n\n\n\n\n\n\n\n";
+	cout<<"******************************************************************\n";
+			
+}else{
+	system("cls");
+	cout<<"******************* LISTA DE ITENS CADASTRADOS *******************\n\n\n\n\n\n\n\n\n";
+	cout<<"******************** NAO HA ITENS CADASTRADOS ********************\n\n\n\n\n\n\n\n\n";
+	cout<<"******************************************************************\n";
+	
+}
+}
+
+void ordenaritens(livro item[TAM]){
+	
+		int i,j,aux,codigo[codigoglobal];
+		float auxp,preco[codigoglobal];
+		
+				//preencher valores para dubble sort
+				for(int c=0;c<codigoglobal;c++){
+					preco[c]=item[c].precovenda;
+					codigo[c]=c+1;					
+					}
+		
+				//organizer por valor
+				for(i=0;i<codigoglobal;i++){					
+					for(j=0;j<codigoglobal-1;j++){
+						if(preco[j]>preco[j+1]){
+							auxp = preco[j];
+							aux = codigo[j];
+							preco[j] = preco[j+1];
+							codigo[j] = codigo[j+1];
+							preco[j+1] = auxp;
+							codigo[j+1] = aux;		
+								
+						}
+								
+					}
+				}
+				
+		
+
+cout<<"*********** LISTA DE ITENS DO MENOR PARA O MAIOR PRECO ***********\n";	
+
+for( int c=0;c<codigoglobal;c++){
+
+cout<<"*********************DETALHAMENTO DO ITEM:"<<c+1<<"**********************\n";
+
+cout<<"Codigo do livro: ";
+cout<<item[codigo[c]-1].codigo<<"\n";
+
+cout<<"Titulo do livro: ";
+cout<<item[codigo[c]-1].titulo<<"\n";
+
+cout<<"Autor do livro: ";
+cout<<item[codigo[c]-1].autor<<"\n";
+
+cout<<"Tipo do livro: ";
+cout<<item[codigo[c]-1].tipo<<"\n";
+
+cout<<"Idioma do livro: ";
+cout<<item[codigo[c]-1].idioma<<"\n";
+
+cout<<"Quantidade disponivel do livro: ";
+cout<<item[codigo[c]-1].quantidade<<"\n";
+
+cout<<"Preco de compra: ";
+cout<<item[codigo[c]-1].precocompra<<"\n";
+
+cout<<"Preco de venda: ";
+cout<<item[codigo[c]-1].precovenda<<"\n";
+
+cout<<"*****************************************************************\n\n\n\n";	
+}
+}
+
+void inicializarcodigos(livro item[TAM]){
+
+for(int cont=0;cont<TAM;cont++){
+
+	item[cont].codigo = 0;
+
+	}		
+	
+}
+
+void excluircadastro(livro item[TAM]){
+	
+int codigoaexcluir,confirmacao;	
+
+cout<<"Digite o codigo que deseja excluir: ";
+codigoaexcluir=validarentrada();
+
+system("cls");
+cout<<"*********************** CADASTRO DE ITEM ***********************\n";
+
+cout<<"*********************DETALHAMENTO DO ITEM DE CODIGO:"<<codigoaexcluir<<"**********************\n";
+
+codigoaexcluir -= 1;
+
+
+cout<<"Codigo do livro: ";
+cout<<item[codigoaexcluir].codigo<<"\n";
+
+cout<<"Titulo do livro: ";
+cout<<item[codigoaexcluir].titulo<<"\n";
+
+cout<<"Autor do livro: ";
+cout<<item[codigoaexcluir].autor<<"\n";
+
+cout<<"Tipo do livro: ";
+cout<<item[codigoaexcluir].tipo<<"\n";
+
+cout<<"Idioma do livro: ";
+cout<<item[codigoaexcluir].idioma<<"\n";
+
+cout<<"Quantidade disponivel do livro: ";
+cout<<item[codigoaexcluir].quantidade<<"\n";
+
+cout<<"Preco de compra: ";
+cout<<item[codigoaexcluir].precocompra<<"\n";
+
+cout<<"Preco de venda: ";
+cout<<item[codigoaexcluir].precovenda<<"\n";
+
+cout<<"*****************************************************************\n\n";	
+cout<<"*********************TEM CERTEZA QUE DESEJA EXCLUIR O CODIGO: "<<codigoaexcluir+1<<"**********************\n";
+cout<<"1-SIM 2-NAO\n\nDIGITE A OPCAO DESEJADA: ";
+confirmacao=validarentrada();
+
+if(confirmacao==1){
+
+
+item[codigoaexcluir].codigo=0;	
+item[codigoaexcluir].titulo="Cadastro excluido";
+item[codigoaexcluir].autor="Cadastro excluido";
+item[codigoaexcluir].tipo="Cadastro excluido";
+item[codigoaexcluir].idioma="Cadastro excluido";
+item[codigoaexcluir].quantidade=0;
+item[codigoaexcluir].precocompra=0;
+item[codigoaexcluir].precovenda=0;
+}else{
+
+cout<<"***************************CODIGO NAO EXCLUIDO***************************\n\n";	
+}
+	
+}
+
+void consultarpornome(livro item[TAM]){
+
+int opcaodeconsulta,i,j;
+string nomeparaconsulta;
+bool busca,retornou;
+system("cls");
+busca=true;
+do{
+system("cls");	
+cout<<"************************** CONULTAR DE ITENS PELO NOME **************************\n\n";	
+cout<<"Digite para consulta: \n1-Titulo do livro \n2-Nome do autor \n3-Tipo  \n4-Idioma\n\nDigite a opocao desejada: ";
+opcaodeconsulta=validarentrada();
+cin.ignore();
+if(opcaodeconsulta==0){
+cout<<"*********************************OPCAO INVALIDA*********************************\n\n";
+system("pause");	
+}
+}while(opcaodeconsulta==0);
+
+
+switch(opcaodeconsulta){
+
+case 1:
+	cout<<"\nCERTIFIQUE-SE SE O ITEM FOI CADASTRADO COM LETRA MAIUSCULA OU MINUSCULA\nDigite o Titulo do livro para realizar a consulta: ";
+	getline(cin,nomeparaconsulta);
+	system("cls");
+	cout<<"BUSCA REALIZADA ATRAVES DO NOME: "<<nomeparaconsulta<<"\n";
+	
+for(i=0;i<codigoglobal;i++){
+	
+	
+	for(j=0;j<nomeparaconsulta.size();j++){
+		if(nomeparaconsulta[j] != item[i].titulo[j]) {
+			busca=false;	
+		}
+	}
+	
+	if(busca){
+	retornou=true;
+	cout<<"*********************DETALHAMENTO DO ITEM DE CODIGO:"<<i+1<<"**********************\n";	
+	cout<<"Codigo do livro: ";
+	cout<<item[i].codigo<<"\n";
+
+	cout<<"Titulo do livro: ";
+	cout<<item[i].titulo<<"\n";
+
+	cout<<"Autor do livro: ";
+	cout<<item[i].autor<<"\n";
+	
+	cout<<"Tipo do livro: ";
+	cout<<item[i].tipo<<"\n";
+	
+	cout<<"Idioma do livro: ";
+	cout<<item[i].idioma<<"\n";
+	
+	cout<<"Quantidade disponivel do livro: ";
+	cout<<item[i].quantidade<<"\n";
+	
+	cout<<"Preco de compra: ";
+	cout<<item[i].precocompra<<"\n";
+	
+	cout<<"Preco de venda: ";
+	cout<<item[i].precovenda<<"\n";
+
+	cout<<"*****************************************************************\n\n\n";		
+
+	}
+busca=true;		
+
+}
+
+break;
+
+
+case 2:
+	cout<<"\nCERTIFIQUE-SE SE O ITEM FOI CADASTRADO COM LETRA MAIUSCULA OU MINUSCULA\nDigite o Autor para realizar a consulta consulta: ";
+	getline(cin,nomeparaconsulta);
+	system("cls");
+	cout<<"BUSCA REALIZADA ATRAVES DO NOME: "<<nomeparaconsulta<<"\n";
+
+for(i=0;i<codigoglobal;i++){
+	
+	
+	for(j=0;j<nomeparaconsulta.size();j++){
+		if(nomeparaconsulta[j] != item[i].autor[j]) {
+			busca=false;	
+		}
+	}
+	
+	if(busca){
+	retornou=true;
+	cout<<"*********************DETALHAMENTO DO ITEM DE CODIGO:"<<i+1<<"**********************\n";	
+	cout<<"Codigo do livro: ";
+	cout<<item[i].codigo<<"\n";
+
+	cout<<"Titulo do livro: ";
+	cout<<item[i].titulo<<"\n";
+
+	cout<<"Autor do livro: ";
+	cout<<item[i].autor<<"\n";
+	
+	cout<<"Tipo do livro: ";
+	cout<<item[i].tipo<<"\n";
+	
+	cout<<"Idioma do livro: ";
+	cout<<item[i].idioma<<"\n";
+	
+	cout<<"Quantidade disponivel do livro: ";
+	cout<<item[i].quantidade<<"\n";
+	
+	cout<<"Preco de compra: ";
+	cout<<item[i].precocompra<<"\n";
+	
+	cout<<"Preco de venda: ";
+	cout<<item[i].precovenda<<"\n";
+
+	cout<<"*****************************************************************\n\n\n";		
+
+	}
+busca=true;		
+}
+
+
+break;
+
+case 3:
+	cout<<"\nCERTIFIQUE-SE SE O ITEM FOI CADASTRADO COM LETRA MAIUSCULA OU MINUSCULA\nDigite o Tipo do Livro para realizar a consulta: ";
+	getline(cin,nomeparaconsulta);
+	system("cls");
+	cout<<"BUSCA REALIZADA ATRAVES DO NOME: "<<nomeparaconsulta<<"\n";
+
+for(i=0;i<codigoglobal;i++){
+	
+	
+	for(j=0;j<nomeparaconsulta.size();j++){
+		if(nomeparaconsulta[j] != item[i].tipo[j]) {
+			busca=false;	
+		}
+	}
+	
+	if(busca){
+	retornou=true;
+	cout<<"*********************DETALHAMENTO DO ITEM DE CODIGO:"<<i+1<<"**********************\n";	
+	cout<<"Codigo do livro: ";
+	cout<<item[i].codigo<<"\n";
+
+	cout<<"Titulo do livro: ";
+	cout<<item[i].titulo<<"\n";
+
+	cout<<"Autor do livro: ";
+	cout<<item[i].autor<<"\n";
+	
+	cout<<"Tipo do livro: ";
+	cout<<item[i].tipo<<"\n";
+	
+	cout<<"Idioma do livro: ";
+	cout<<item[i].idioma<<"\n";
+	
+	cout<<"Quantidade disponivel do livro: ";
+	cout<<item[i].quantidade<<"\n";
+	
+	cout<<"Preco de compra: ";
+	cout<<item[i].precocompra<<"\n";
+	
+	cout<<"Preco de venda: ";
+	cout<<item[i].precovenda<<"\n";
+
+	cout<<"*****************************************************************\n\n\n";		
+
+	}
+busca=true;		
+}
+
+
+
+break;
+
+case 4:
+	cout<<"\nCERTIFIQUE-SE SE O ITEM FOI CADASTRADO COM LETRA MAIUSCULA OU MINUSCULA\nDigite o idioma do livro para realizar a consulta: ";
+	getline(cin,nomeparaconsulta);
+	system("cls");
+	cout<<"BUSCA REALIZADA ATRAVES DO NOME: "<<nomeparaconsulta<<"\n";
+	
+for(i=0;i<codigoglobal;i++){
+	
+	
+	for(j=0;j<nomeparaconsulta.size();j++){
+		if(nomeparaconsulta[j] != item[i].idioma[j]) {
+			busca=false;	
+		}
+	}
+	
+	if(busca){
+	retornou=true;
+	cout<<"*********************DETALHAMENTO DO ITEM DE CODIGO:"<<i+1<<"**********************\n";	
+	cout<<"Codigo do livro: ";
+	cout<<item[i].codigo<<"\n";
+
+	cout<<"Titulo do livro: ";
+	cout<<item[i].titulo<<"\n";
+
+	cout<<"Autor do livro: ";
+	cout<<item[i].autor<<"\n";
+	
+	cout<<"Tipo do livro: ";
+	cout<<item[i].tipo<<"\n";
+	
+	cout<<"Idioma do livro: ";
+	cout<<item[i].idioma<<"\n";
+	
+	cout<<"Quantidade disponivel do livro: ";
+	cout<<item[i].quantidade<<"\n";
+	
+	cout<<"Preco de compra: ";
+	cout<<item[i].precocompra<<"\n";
+	
+	cout<<"Preco de venda: ";
+	cout<<item[i].precovenda<<"\n";
+
+	cout<<"*****************************************************************\n\n\n";		
+
+	}
+busca=true;		
+
+}
+
+
+
+break;
+
+default:
+	
+cout<<"*********************************OPCAO INVALIDA*********************************\n\n";
+
+break;	
+	
+}
+
+
+
+if(retornou==false){
+
+cout<<"\n\nNAO FOI ENCONTRADO ITEM COM O NOME: "<<	nomeparaconsulta<<"\n";
+	
+}
+
+
+
+}
+
+void pesquisaritem(livro item[TAM]){
+int codigoaconsultar;
+
+cout<<"Digite o codigo que deseja consultar: ";
+codigoaconsultar=validarentrada();
+if(codigoaconsultar<=codigoglobal){
+cout<<"****************** LISTA DE ITENS CADASTRADOS ******************\n";	
+
+cout<<"*********************DETALHAMENTO DO ITEM DE CODIGO:"<<codigoaconsultar<<"**********************\n";
+
+codigoaconsultar -= 1;
+
+
+cout<<"Codigo do livro: ";
+cout<<item[codigoaconsultar].codigo<<"\n";
+
+cout<<"Titulo do livro: ";
+cout<<item[codigoaconsultar].titulo<<"\n";
+
+cout<<"Autor do livro: ";
+cout<<item[codigoaconsultar].autor<<"\n";
+
+cout<<"Tipo do livro: ";
+cout<<item[codigoaconsultar].tipo<<"\n";
+
+cout<<"Idioma do livro: ";
+cout<<item[codigoaconsultar].idioma<<"\n";
+
+cout<<"Quantidade disponivel do livro: ";
+cout<<item[codigoaconsultar].quantidade<<"\n";
+
+cout<<"Preco de compra: ";
+cout<<item[codigoaconsultar].precocompra<<"\n";
+
+cout<<"Preco de venda: ";
+cout<<item[codigoaconsultar].precovenda<<"\n";
+
+cout<<"*****************************************************************\n\n\n\n";	
+}else{
+
+cout<<"\n\nO item de codigo "<<codigoaconsultar<<" nao foi cadastrado ate o momento.\nTente novamente ou retorne ao Menu."<<"\n\n";
+cout<<"****************************************************************\n\n";
+system("pause");
+system("cls");	
+	
+}	
+	
+}
+
+void opcaoinvalida(){
+	
+cout<<"*********************************OPCAO INVALIDA*********************************\n\n";
+	
+} 
+
+void alterarcadastro(livro item[TAM]){
+
+int itemaalterar,campoaalterar;
+
+cout<<"Digite o codigo que deseja alterar: ";
+itemaalterar=validarentrada();	
+system("cls");
+if(itemaalterar<=codigoglobal){
+
+cout<<"*********************** CADASTRO DE ITEM ***********************\n";
+
+cout<<"*********************DETALHAMENTO DO ITEM DE CODIGO:"<<itemaalterar<<"**********************\n";
+
+itemaalterar -= 1;
+
+
+cout<<"Codigo do livro: ";
+cout<<item[itemaalterar].codigo<<"\n";
+
+cout<<"Titulo do livro: ";
+cout<<item[itemaalterar].titulo<<"\n";
+
+cout<<"Autor do livro: ";
+cout<<item[itemaalterar].autor<<"\n";
+
+cout<<"Tipo do livro: ";
+cout<<item[itemaalterar].tipo<<"\n";
+
+cout<<"Idioma do livro: ";
+cout<<item[itemaalterar].idioma<<"\n";
+
+cout<<"Quantidade disponivel do livro: ";
+cout<<item[itemaalterar].quantidade<<"\n";
+
+cout<<"Preco de compra: ";
+cout<<item[itemaalterar].precocompra<<"\n";
+
+cout<<"Preco de venda: ";
+cout<<item[itemaalterar].precovenda<<"\n";
+
+cout<<"*****************************************************************\n\n";	
+
+
+cout<<"QUAl CAMPO DO ITEM "<<itemaalterar+1<<" DESEJA ALTERAR?\n\n";
+cout<<"1-Alterar o Titulo\n2-Alterar o Autor\n3-Alterar o Tipo\n4-Alterar o idioma\n5-Alterar a quantidade em esoque\n6-Aterar o preco de compra\n7-Alterar o preco de venda\n9-Voltar ao Menu\nDigite a opcao desejada:";
+campoaalterar=validarentrada();
+
+switch(campoaalterar){
+	
+case 1:	
+
+cin.ignore();	
+cout<<"Digite o titulo do livro: ";
+getline(cin,item[itemaalterar].titulo);
+
+break;
+
+case 2:
+
+cin.ignore();
+cout<<"Digite o autor do livro: ";
+getline(cin,item[itemaalterar].autor);
+
+break;
+
+case 3:
+
+cin.ignore();
+cout<<"Digite o tipo do livro: ";
+getline(cin,item[itemaalterar].tipo);	
+
+break;
+
+case 4:
+
+cin.ignore();
+cout<<"Digite o idioma do livro: ";
+getline(cin,item[itemaalterar].idioma);
+
+break;
+
+case 5:
+
+do{
+cout<<"Digite a quantidade comprada: ";
+item[itemaalterar].quantidade=validarentrada();	
+	if(campoaalterar==0){
+	cout<<"Digite um valor numerico";		
+	}	
+}while(campoaalterar==0);
+
+break;
+
+case 6:
+
+do{
+cout<<"Digite o preco de compra: ";
+item[itemaalterar].precocompra=validarentrada();	
+cin.ignore();
+	if(campoaalterar==0){
+	cout<<"Digite um valor numerico";		
+	}
+}while(campoaalterar==0);
+
+break;
+
+case 7:
+
+do{
+cout<<"Digite o preco de venda: ";
+item[itemaalterar].precovenda=validarentrada();	
+cin.ignore();
+	if(campoaalterar==0){
+	cout<<"Digite um valor numerico";		
+	}
+}while(campoaalterar==0);
+	
+break;
+
+case 9:
+	
+cout<<"\n\nO item de codigo "<<itemaalterar+1<<" nao foi alterado."<<"\n\n";
+cout<<"****************************************************************\n\n";
+system("pause");
+
+break;	
+
+default:
+	
+opcaoinvalida();	
+
+cout<<"\n\nO item de codigo "<<itemaalterar+1<<" foi alterado com sucesso."<<"\n\n";
+cout<<"****************************************************************\n\n";
+system("pause");
+}
+}else{
+cout<<"\n\nO item de codigo "<<itemaalterar+1<<" nao foi cadastrado ate o momento.\nRetorne ao Menu ou digite um codigo valido."<<"\n\n";
+cout<<"****************************************************************\n\n";
+system("pause");	
+}
+
+
+
+
+}
+
+int main(){
+	
+livro item[TAM];
+string auxtexto[TAM];
+int cont, cont2, valid, opcao,sair;
+
+inicializarcodigos(item);
+
+importarcadastro(item);	
+
+	cout<<"******************************** SEJA BEM VINDO ********************************\n";
+	cout<<"PROGRAMA DESENVOLVIDO POR:\n\nDAVID ALVES DE ALBUQUERQUE - MATRICULA:01300655\nGERMANO LUIZ GOMES DE LIMA - MATRICULA:01291703\nJAVAN ROBERTO CAMPOS DE SOUZA - MATRICULA: 01332984\n";
+	cout<<"\nORIENTADO PELO PROFESSOR: PAULO HENRIQUE - DISCIPLINA: PROGRAMACAO - LINGUAGEM C++\n\n";
+	system("pause");
+	system("cls");
+	cout<<"\nO PROGRAMA CARREGARA AS INFORMACOES  DO ARQUIVO DE BACKUP AUTOMATICAMENTE\n\n";	
+	system("pause");
+	system("cls");
+
+
+menuiniciar:
+
+do{
+	
+		cout<<"******************************** SEJA BEM VINDO ********************************\n";
+		cout<<"\nItens cadastrados ate o momento: "<<codigoglobal<<endl<<endl;
+		cout<<"Digite: \n1-Cadastro de itens\n2-Consultar itens\n3-Alterar itens \n4-Arquivos\n9-Sair do programa\n\nDigite a opcao desejada: ";
+		opcao = validarentrada();
+		system("cls");
+		switch(opcao){
+
+	case 1:
+		telacadastro:
+		int opcaocadastro;	
+			do{
+			cout<<"*********************************** CADASTRO ***********************************\n";
+			cout<<"1-Para cadastrar um novo item ou 9-Voltar ao Menu\nDigite a opcao desejada:";
+			opcaocadastro = validarentrada();
+			
+			switch(opcaocadastro){			
+				
+				case 1:		
+				system("cls");
+				cadastraritem(item);
+			
+				break;
+			
+				case 9:
+			
+				system("cls");
+				goto menuiniciar;	
+				
+				break;
+			
+				default:
+				system("cls");	
+				opcaoinvalida();	
+				
+			}					
+			do{
+			cout<<"\n1-Para cadastrar um novo item ou 9-Voltar ao Menu\nDigite a opcao desejada:";
+			opcaocadastro=validarentrada();
+			if(opcaocadastro==1){
+				system("cls");	
+				cadastraritem(item);	
+				}
+			system("cls");	
+			}while(opcaocadastro!=9);			
+				system("cls");
+			}while(opcaocadastro!=9);
+		
+	break;
+	
+	case 2:
+		telaconsulta:
+		int opcaoconsulta;
+			do{	
+				cout<<"*********************************** CONSULTA ***********************************\n";
+				cout<<"Digite:\n1-Listar itens pela ordem de codigo\n2-Consultar item pelo codigo \n3-Consultar itens pelo nome\n4-Ordenar do menor para o maior preco de venda\n9-Voltar ao Menu\nDigite a opcao desejada: ";
+				opcaoconsulta=validarentrada();
+				
+				switch(opcaoconsulta){
+				
+					case 1:
+						system("cls");
+						listaritens(item);
+					break;
+				
+					case 2:
+						system("cls");
+						pesquisaritem(item);
+					break;	
+				
+					case 3:
+						system("cls");
+						consultarpornome(item);
+				
+					break;
+					
+					case 4:
+						system("cls");
+						ordenaritens(item);
+						
+					break;
+
+					case 9:
+						system("cls");					
+						goto menuiniciar;				
+					break;	
+			
+					default:
+					system("cls");
+					opcaoinvalida();
+					goto telaconsulta;
+					
+		}
+		
+		do{
+		cout<<"\nDigite 1-Para realizar uma nova consulta de item ou 9-Voltar ao Menu\nDigite a opcao desejada: ";
+		opcaoconsulta=validarentrada();
+		if(opcaoconsulta==1){
+		system("cls");	
+		goto telaconsulta;	
+		}
+		}while(opcaoconsulta!=9);
+		system("cls");
+		}while(opcaoconsulta!=9);
+	
+	break;
+	
+	case 3:
+		menualterar:
+		int opcaoalterar;
+		do{
+		
+		int opcaoalterar;
+			cout<<"**************************** ALTERACAO DE CADASTRO *****************************\n";
+			cout<<"1-Alterar cadastro\n2-Excluir cadastro\n9-Voltar ao Menu\nDigite a opcao desejada: ";
+			opcaoalterar=validarentrada();
+				if(opcaoalterar==0){
+					opcaoinvalida();	
+			}
+		switch(opcaoalterar){
+		
+			case 1:
+				
+				alterarcadastro(item);
+				
+			break;
+			
+			case 2:				
+				excluircadastro(item);	
+				
+			break;
+				
+			case 9:
+				system("cls");					
+				goto menuiniciar;
+			break;
+			
+			default:
+			system("cls");
+			opcaoinvalida();
+			goto menualterar;			
+		}
+		
+		do{
+		cout<<"\nDigite 1-Para realizar uma nova alteracao de item ou 9-Voltar ao Menu\nDigite a opcao desejada: ";
+		opcaoalterar=validarentrada();
+		if(opcaoalterar==1){
+		system("cls");		
+		goto menualterar;	
+		}
+		}while(opcaoalterar!=9);
+		system("cls");
+		}while(opcaoalterar!=9);
+	
+	break;
+		
+	case 4:
+	menuarquivo:
+	int opcaoarquvios;
+			do{
+			cout<<"***************************** ARQUIVOS E RELATORIOS ****************************\n";
+			cout<<"1-Exportar banco de dados\n2-Importar Banco de dados\n3-Extrair Relatorio\n9-Voltar ao Menu\nDigite a opcao desejada: ";
+			opcaoarquvios=validarentrada();	
+	
+			switch(opcaoarquvios){
+	
+				case 1:
+	
+					exportarcadastro(item);	
+		
+				break;
+	
+				case 2:
+	
+					importarcadastro(item);	
+	
+				break;
+					
+				case 3:
+				
+				extrairrelatorio(item);
+				
+				break;	
+		
+				case 9:
+				
+				system("cls");					
+				goto menuiniciar;	
+				
+				break;
+				
+				default:
+				system("cls");
+				opcaoinvalida();
+				goto menuarquivo;
+				}
+	
+		do{		
+		cout<<"\nDigite 1-Para realizar uma nova alteracao de arquivo ou 9-Voltar ao Menu\nDigite a opcao desejada: ";
+		opcaoarquvios=validarentrada();
+		if(opcaoconsulta==1){
+		system("cls");		
+		goto menuarquivo;	
+		}
+		}while(opcaoarquvios!=9);			
+		system("cls");
+		}while(opcaoarquvios!=9);
+		
+		break;
+			
+	case 9:
+			menusairesalvar:				
+			int sairesalvar;
+			cout<<"Digite: \n1-Retornar ao Menu\n8-Sair e salvar as alteracoes\n9-Sair sem salvar as alteracoes\n";
+			sairesalvar=validarentrada();
+			
+			switch(sairesalvar){
+			
+			case 1:
+			system("cls");	
+			goto menuiniciar;
+			
+			break;
+			
+			case 8:	
+			
+			exportarcadastro(item);			
+			sair=9;
+			
+			break;
+			
+			case 9:
+		
+			sair=9;
+			
+			break;
+			
+			default:
+			system("cls");
+			opcaoinvalida();
+			goto menusairesalvar;	
+			
+		}
+		
+	break;
+	
+	default:
+	opcaoinvalida();
+	
+}
+system("cls");
+}while(sair!=9);
