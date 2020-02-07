@@ -1,0 +1,45 @@
+#include <iostream>
+#define TAM 100
+
+
+using namespace std;
+
+
+int main(){
+
+
+
+int cont=0;
+
+
+
+for(int i= 1; i<=TAM;i++){
+	
+	for(int j=1;j<=i;j++){  
+		//faz a validação se o número é divisível por ele mesmo e todos seus antecessores 
+    
+		if  (i%j==0){
+		//se o resto da divisão é igual a 0, cont incrementa + 1
+		 	cont++;
+		
+		
+			}
+	
+		} 
+	
+  //Verifica e imprime se o número é primo.
+  //Caso o cont seja maior que 2 o número não é primo, pois o número primo só tem duas divisões possíveis
+	if(cont==2){
+		
+		cout<<i<<" ";
+	
+		}
+
+	//reinicia o contador toda vez que terminar o segundo FOR.
+	cont=0;
+	
+
+	}	
+  
+  }
+	
